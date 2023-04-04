@@ -34,16 +34,18 @@ public class BankAccountController {
      **/
     @GetMapping("/findAccountsByCustomer/{idCustomer}")
     public Flux<BankAccount> findByIdCustomer(@PathVariable("idCustomer") String idCustomer) {
-        /*        log.info("All bank accounts were consulted");*/
+        log.info("Bank account was consulted by idCustomer");
         return bankAccountService.findByIdCustomer(idCustomer);
     }
     /**
      * Consultar cuenta bancaria por idCustomer
      **/
     @GetMapping("/findById/{id}")
-    public Mono<BankAccount> findById(@PathVariable("id") String id) {
+    public Mono<ResponseEntity<BankAccount>> findById(@PathVariable("id") String id) {
         log.info("Bank account consulted by id " + id);
-        return bankAccountService.findById(id);
+        return bankAccountService.findById(id)
+                .map(ResponseEntity::ok)
+                .switchIfEmpty(Mono.error(() -> new RuntimeException("No se encontró la cuenta bancaria")));
 
     }
     /**
