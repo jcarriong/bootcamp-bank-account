@@ -1,9 +1,6 @@
 package com.bootcamp.bankaccount.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,10 +14,10 @@ import java.util.List;
 public class BankAccount extends BaseAuditDto{
 
     @Id
-    private String id_account;
-    private String id_product;
-    private String id_customer;
-    private String account_number; //numero de cuenta (14 digits)
+    private String idAccount;
+    private String idProduct;
+    private String idCustomer;
+    private String accountNumber; //numero de cuenta (14 digits)
     private String cci; //numero de cuenta interbancaria (20 digits)
     private Float availableBalance; //saldo disponible
     private List<String> holderAccount; //cuenta titular 1.*
